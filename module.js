@@ -205,7 +205,13 @@ M.mod_questionnaire = M.mod_questionnaire || {};
 /* exported Y */
 /* exported e */
 M.mod_questionnaire.init_attempt_form = function(Y) {
-    M.core_formchangechecker.init({formid: 'phpesp_response'});
+    require(['core_formchangechecker'], function(FormChangeChecker) {
+        if (typeof FormChangeChecker !== 'undefined') {
+            FormChangeChecker.init({formid: 'phpesp_response'});
+        } else {
+            console.error('core_formchangechecker n’a pas été chargé correctement.');
+        }
+    });
 };
 
 M.mod_questionnaire.init_sendmessage = function(Y) {
